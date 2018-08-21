@@ -1,0 +1,88 @@
+{% extends 'layout/app.html.twig' %}
+
+{% block content %}
+
+    <div class="card card-cascade narrower">
+
+        <div class="view view-cascade gradient-card-header blue-gradient narrower py-2 mx-4 mb-3 d-flex justify-content-between align-items-center">
+            <div>
+                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                    <i class="fa fa-bars mt-0"></i>
+                </button>
+                <button type="button" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                    <i class="fa fa-columns mt-0"></i>
+                </button>
+            </div>
+
+            <h4 class="white-text mx-3">Symfony 3.4 CRUD</h4>
+
+            <div>
+                <a href="{{ absolute_url('/post/create') }}" class="btn btn-outline-white btn-rounded btn-sm px-2">
+                    <i class="fa fa-plus mt-0"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="px-4">
+            <div class="table-wrapper">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input class="form-check-input" type="checkbox" id="checkbox">
+                                <label class="form-check-label" for="checkbox" class="mr-2 label-table"></label>
+                            </th>
+                            <th class="th-lg">
+                                <a>Title
+                                    <i class="fa fa-sort ml-1"></i>
+                                </a>
+                            </th>
+                            <th class="th-lg">
+                                Description
+                            </th>
+                            <th class="th-lg">
+                                <a>Category
+                                    <i class="fa fa-sort ml-1"></i>
+                                </a>
+                            </th>
+                            <th class="th-lg text-center" width="25%">
+                                Action
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for post in posts %}
+                            
+                            <tr>
+                                <th scope="row">
+                                    <input class="form-check-input" type="checkbox" id="checkbox-{{ post.id }}">
+                                    <label class="form-check-label" for="checkbox-{{ post.id }}" class="label-table"></label>
+                                </th>
+                                <td>{{ post.title }}</td>
+                                <td>{{ post.description }}</td>
+                                <td>{{ post.category }}</td>
+                                <td class="text-center">
+                                    <a href="{{ absolute_url('/post/show/') }}{{ post.id }}" class="btn btn-outline-success btn-sm m-0">
+                                        <i class="fa fa-eye"></i>
+                                    </a>
+                                    <a href="{{ absolute_url('/post/update/') }}{{ post.id }}" class="btn btn-outline-default btn-sm m-0">
+                                        <i class="fa fa-pencil"></i>
+                                    </a>
+                                    <a href="{{ absolute_url('/post/delete/') }}{{ post.id }} " class="btn btn-outline-danger btn-sm m-0">
+                                        <i class="fa fa-remove"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                        {% else %}
+                            <tr>
+                                <td colspan="5" class="text-center text-danger">No records Found!</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

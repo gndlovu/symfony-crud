@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %} Symnfony3 CRUD {% endblock %}</title>
+
+        <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('css/compiled-4.5.7.min.css')) }}" />
+        <link rel="stylesheet" type="text/css" href="{{ absolute_url(asset('css/font-awesome.min.css')) }}" />
+        {% block styles %}{% endblock %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+
+        <div class="container-fluid my-5 w-75">
+            {% block content %}{% endblock %}
+        </div>
+
+        <script type="text/javascript" src="{{ absolute_url(asset('js/jquery-3.3.1.min.js')) }}"></script>
+        <script type="text/javascript" src="{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>
+        <script type="text/javascript" src="{{ absolute_url(asset('js/bootstrap.min.js')) }}"></script>
+        <script type="text/javascript" src="{{ absolute_url(asset('js/toastr.min.js')) }}"></script>
+        <script type="text/javascript" src="{{ absolute_url(asset('js/core.js')) }}"></script>
+        {% block scripts %}{% endblock %}
+
+       {% for label, messages in app.flashes(['info', 'success', 'warning', 'error']) %}
+            {% for message in messages %}
+                
+                <script type="text/javascript">
+                    notify('{{ label }}', '{{ message }}');
+                </script>
+
+            {% endfor %}
+        {% endfor %}
+
+    </body>
+</html>
